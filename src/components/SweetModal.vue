@@ -99,7 +99,14 @@
 <script>
 	export default {
 		name: 'SweetModal',
-
+		watch: {
+			custom: function(){
+				console.log(this);
+				setTimeout(() =>{
+					this.reload_tab();
+				}, 1);
+			},
+		},
 		props: {
 			title: {
 				type: String,
@@ -141,6 +148,11 @@
 				type: Boolean,
 				required: false,
 				default: false
+			},
+
+			custom: {
+				type: Array,
+				required: false,
 			}
 		},
 
@@ -218,6 +230,18 @@
 			 * Open the dialog
 			 * Emits an event 'open'
 			 */
+ 			reload_tab: function(){
+				console.log('************************** HERE **************************');
+				console.log();
+				console.log('---------------------------------------------------------');
+				this.tabs = this.$children.filter(c => c.cmpName && c.cmpName == 'tab')
+
+				if (this.has_tabs) {
+					this.currentTab = this._changeTab(this.tabs[0])
+				}
+
+				document.addEventListener('keyup', this._onDocumentKeyup)
+			},
 			open() {
 				this.is_open = true
 				this._animateIcon()

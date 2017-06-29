@@ -155,6 +155,16 @@
 					This is the child modal.
 				</sweet-modal>
 			</example>
+
+
+			<example action-title="test" v-on:action="openExample('test')" :code="examples.test" language="xml">
+				<sweet-modal ref="test" :custom="list">
+					<sweet-modal-tab v-for="(name, index) in list" :title="name+''+index" :id="'tab'+index">
+						Contents of Tab {{index}}
+					</sweet-modal-tab>
+
+				</sweet-modal>
+			</example>
 		</content-section>
 
 		<content-section title="Install" class="install">
@@ -398,6 +408,15 @@
 
 	export default {
 		name: 'MainView',
+		mounted: function(){
+			window.debug_this = this;
+		},
+		data: function(){
+			return {
+				list: [
+				]
+			};
+		},
 
 		components: {
 			SweetModal,
@@ -501,7 +520,12 @@
 
 					<sweet-modal ref="nestedChild">
 						This is the child modal.
-					</sweet-modal>`
+					</sweet-modal>`,
+
+					test: `<sweet-modal>
+						<sweet-modal-tab v-for="(name, index in ["roger, george"])" :title="name+''+index" :id="'tab'+index">Contents of Tab {{index}}</sweet-modal-tab>
+
+					</sweet-modal>`,
 				}
 			}
 		},

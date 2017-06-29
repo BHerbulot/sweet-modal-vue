@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import MainView from './views/Main'
+import MainView from './views/my_test'
 
 const app = new Vue({
 	components: {
